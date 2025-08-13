@@ -1,0 +1,12 @@
+Package: DataKit
+Title: Reusable functions for Akvo's Data Team
+Version: 0.0.0.9000
+Authors@R: 
+    person("Sandra", "Fudorova", , "sandra@akvo.org", role = c("aut", "cre"))
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

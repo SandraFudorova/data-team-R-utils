@@ -1,0 +1,94 @@
+---
+title: "DataKit"
+format: html
+editor: visual
+---
+
+```{r}
+rm(list = ls(), envir = .GlobalEnv)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readxl); library(openxlsx);
+library(plyr); library(dplyr); library(tidyr); library(here); library(tidylog); library(tidyselect)
+library(stringr); library(data.table); library(reshape2); library(ggrepel)
+library(zoo);library(splitstackshape) ;library(tidyverse); library(magrittr) ; library(haven); library(tibble); library(purrr);library(ggplot2)
+```
+
+# 1. Load Data
+
+```{r}
+Data <- read_excel("~/Documents/GitHub/Analytics-Guild/1. Descriptive Analytics/Fairfood:Heifer LIP Work/Uganda Ndugu 2025/Ndugu Lip Data Compiled.xlsx")
+```
+
+# 2. Standard Data Cleaning
+
+```{r}
+Data <- clean_raw_data(Data, irrelevant_columns = "farmer_sample", deduplicate_by =
+                         "farmer-code")
+
+```
+
+# 3. Other Variables
+
+-   add the option to specify the separator
+
+```{r}
+Data$x_other <- 1
+Data <- merge_other(Data)
+
+```
+
+# 4. Outlier Detection
+
+```{r}
+Data <- outlier_detection(Data, replacement = 9997, exclude_columns = c("mobile_number_farmer", "pi_geolocation"))
+```
+
+```{r}
+Data <- replace_placeholders(Data,character_values = c("i don't know", "i prefer not to say", "9999", "9998", "nill"))
+```
+
+# 5. Correcting Quantities
+
+```{r}
+Data <- correct_quantities(Data, include_premium = FALSE)
+```
+
+# 6. Variable Checks
+
+## 6.1 Numerical Variable
+
+```{r}
+check_num_variable(Data, f_focus_quant_prod, bins = 50)
+check_num_variable(Data, f_focus_quant_lost)
+```
+
+## 6.2 Categorical Variables
+
+```{r}
+check_cat_variable(Data, f_coffee_farm_age, show_plot = FALSE)
+```
+
+# 7. Other ideas and Notes
+
+-   productivity check
+
+-   Kobo sheets merger
+
+    -   Guidance sheet/other resource for standardising how we merge data
+
+    -   desire to keep the merged dataset similar to AkvoFlow
+
+    -   lot of different aspects to consider, merging is not always the same
+
+-   Standardising processes crucial for proper function use
+
+-   Look at other aspects of the data quality checks
+
+-   should functions be split for other types of data
+
+-   Check how much of the actual R script could be shared as an additional resource to customers
+
+# 
