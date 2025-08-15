@@ -4,12 +4,7 @@
 \alias{clean_raw_data}
 \title{Clean Raw Survey Data}
 \usage{
-clean_raw_data(
-  data,
-  irrelevant_columns = NULL,
-  deduplicate_by = NULL,
-  log_file = "cleaning_log.txt"
-)
+clean_raw_data(data, irrelevant_columns = NULL, deduplicate_by = NULL)
 }
 \arguments{
 \item{data}{A data frame to clean.}
@@ -17,8 +12,6 @@ clean_raw_data(
 \item{irrelevant_columns}{A character vector of column names to remove.}
 
 \item{deduplicate_by}{Optional. Name of the column to deduplicate by (e.g., \code{"uuid"}). Default is \code{NULL}.}
-
-\item{log_file}{A file path to write log messages to. Default is \code{"cleaning_log.txt"}.}
 }
 \value{
 A cleaned data frame.
@@ -28,11 +21,11 @@ Applies a standard cleaning pipeline to survey data by:
 \itemize{
 \item Converting dates (if present)
 \item Removing specified irrelevant columns
+\item Removing trailing spaces in character columns
 \item Lowercasing column names
 \item Keeping only farmers that "accepted to participate"
 \item Dropping fully empty columns
 \item Optionally deduplicating rows
-\item Logging cleaning steps
 }
 }
 \examples{
