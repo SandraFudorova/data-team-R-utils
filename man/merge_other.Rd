@@ -4,10 +4,12 @@
 \alias{merge_other}
 \title{Merge "_other" Fields with Parent Columns}
 \usage{
-merge_other(data)
+merge_other(data, sep = " | ")
 }
 \arguments{
 \item{data}{A data frame containing the parent and "_other" columns.}
+
+\item{sep}{A string used to separate merged values. Default is \code{" | "}.}
 }
 \value{
 A data frame with merged columns. Issues a warning for unmatched "_other" fields.
@@ -18,5 +20,6 @@ parent column (e.g., \code{"crop"} for \code{"crop_other"}) and combines them in
 Values are joined with a separator (default: \code{" | "}). The \code{"_other"} column is then removed.
 }
 \examples{
-Data <- merge_other(Data)
+Data <- merge_other(Data)                   # uses default " | "
+Data <- merge_other(Data, sep = "; ")       # custom separator
 }
