@@ -23,3 +23,4 @@ convert <- function(df, unit_col, value_col, output_col, conversions) {
         .data[[value_col]] * conversions[.data[[unit_col]]]
     )
 }
+
