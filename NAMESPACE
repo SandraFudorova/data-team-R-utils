@@ -3,6 +3,7 @@
 export(check_cat_variable)
 export(check_num_variable)
 export(clean_raw_data)
+export(convert)
 export(correct_quantities)
 export(merge_other)
 export(outlier_detection)
